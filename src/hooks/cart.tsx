@@ -31,7 +31,7 @@ const CartProvider: React.FC = ({ children }) => {
   useEffect(() => {
     async function loadProducts(): Promise<void> {
       const storagedProducts = await AsyncStorage.getItem(
-        '@GotMarketPlace:products',
+        '@GoMarketPlace:products',
       );
 
       if (storagedProducts) {
@@ -53,11 +53,11 @@ const CartProvider: React.FC = ({ children }) => {
           ),
         );
       } else {
-        setProducts([products, { ...product, quantity: 1 }]);
+        setProducts(old => [...old, { ...product, quantity: 1 }]);
       }
 
       await AsyncStorage.setItem(
-        '@GotMarketPlace:products',
+        '@GoMarketPlace:products',
         JSON.stringify(products),
       );
     },
@@ -75,7 +75,7 @@ const CartProvider: React.FC = ({ children }) => {
       setProducts(newProducts);
 
       await AsyncStorage.setItem(
-        '@GotMarketPlace:products',
+        '@GoMarketPlace:products',
         JSON.stringify(newProducts),
       );
     },
@@ -84,16 +84,19 @@ const CartProvider: React.FC = ({ children }) => {
 
   const decrement = useCallback(
     async id => {
-      const newProducts = products.map(product =>
-        product.id === id
-          ? { ...product, quantity: product.quantity - 1 }
-          : product,
-      );
+      const productIndex = products.findIndex(product => product.id === id);
 
-      setProducts(newProducts);
+      const newProducts = [...products];
+
+      if (newProducts[productIndex].quantity < 2) {
+        setProducts(newProducts.filter(product => product.id !== id));
+      } else {
+        newProducts[productIndex].quantity -= 1;
+        setProducts(newProducts);
+      }
 
       await AsyncStorage.setItem(
-        '@GotMarketPlace:products',
+        '@GoMarketPlace:products',
         JSON.stringify(newProducts),
       );
     },

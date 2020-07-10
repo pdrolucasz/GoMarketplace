@@ -30,7 +30,7 @@ export const ProductList = styled(
 `;
 
 export const Product = styled.View`
-  background: #fff;
+  background: ${props => props.theme.colors.bakcgroundProduct};
   padding: 16px 16px;
   border-radius: 5px;
   margin: 8px;
@@ -46,6 +46,7 @@ export const ProductImage = styled.Image`
 export const ProductTitle = styled.Text`
   font-size: 14px;
   margin-top: 10px;
+  color: ${props => props.theme.colors.text};
 `;
 
 export const PriceContainer = styled.View`
