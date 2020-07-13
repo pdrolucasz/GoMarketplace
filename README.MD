@@ -1,8 +1,8 @@
-# 🚀 GoFinances
+# 🚀 GoMarketplace
 
 ## 🔖 Sobre
 <p>
-  GoMarketplace, aplicação de vendas, o usuário pode adicionar e remover produtos do carrinho.
+  GoMarketplace, uma aplicação de vendas, o usuário pode adicionar e remover produtos do carrinho.
 </p>
 
 <h1>Funcionalidades</h1>
